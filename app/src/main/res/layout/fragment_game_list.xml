@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="state"
+                type="com.macsanityapps.capsl.navigation.gamelist.GameListViewModel.State" />
+
+        <variable
+                name="gamelistbinding"
+                type="me.tatarka.bindingcollectionadapter2.ItemBinding" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".navigation.gamelist.GameListFragment">
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/rv_game_list"
+                android:visibility="@{(state.gameList.isEmpty() || state.loading) ? View.GONE : View.VISIBLE }"
+                app:itemBinding="@{gamelistbinding}"
+                app:items="@{state.gameList}"
+                app:spanCount="2"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                tools:listitem="@layout/view_game_item"
+        />
+
+        <TextView
+                android:id="@+id/empty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                android:text="No Game list found."
+                android:textSize="16sp"
+                android:visibility="@{(state.gameList.isEmpty() &amp;&amp; !state.loading) ? View.VISIBLE : View.GONE, default=gone }"
+                tools:visibility="visible" android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toBottomOf="parent" android:layout_marginTop="8dp"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="44dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="@{state.loading ? View.VISIBLE : View.GONE, default=gone }"
+                tools:visibility="visible" android:layout_marginEnd="8dp" app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginStart="8dp" app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginTop="8dp" app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginBottom="8dp" app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

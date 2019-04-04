@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools" android:id="@+id/main_navigation"
+            app:startDestination="@id/gameListFragment">
+    <fragment android:id="@+id/gameListFragment" android:name="com.macsanityapps.capsl.navigation.gamelist.GameListFragment"
+              android:label="fragment_game_list" tools:layout="@layout/fragment_game_list">
+        <action android:id="@+id/action_gameListFragment_to_stageListFragment" app:destination="@id/stageListFragment"/>
+    </fragment>
+    <fragment android:id="@+id/stageListFragment" android:name="com.macsanityapps.capsl.navigation.stagelist.StageListFragment"
+              android:label="fragment_stage_list" tools:layout="@layout/fragment_stage_list">
+        <action android:id="@+id/action_stageListFragment_to_playerListFragment"
+                app:destination="@id/playerListFragment"/>
+        <argument android:name="game" app:argType="com.macsanityapps.capsl.domain.model.GameListResult"/>
+    </fragment>
+    <fragment android:id="@+id/playerListFragment" android:name="com.macsanityapps.capsl.navigation.playerlist.PlayerListFragment"
+              android:label="fragment_player_list" tools:layout="@layout/fragment_player_list">
+        <action android:id="@+id/action_playerListFragment_to_gameScheduleFragment"
+                app:destination="@id/gameScheduleFragment"/>
+    </fragment>
+    <fragment android:id="@+id/gameScheduleFragment" android:name="com.macsanityapps.capsl.navigation.addtime.GameScheduleFragment"
+              android:label="fragment_game_schedule" tools:layout="@layout/fragment_game_schedule">
+        <action android:id="@+id/action_gameScheduleFragment_to_tournamentFragment"
+                app:destination="@id/tournamentFragment"/>
+    </fragment>
+    <fragment android:id="@+id/tournamentFragment" android:name="com.macsanityapps.capsl.navigation.tournament.TournamentFragment"
+              android:label="fragment_tournament" tools:layout="@layout/fragment_tournament"/>
+</navigation>
